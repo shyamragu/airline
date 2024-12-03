@@ -1,0 +1,58 @@
+flights = {
+    "MUB-KPN": {"price": 4000, "seats": 6},
+    "CBE-ERD": {"price": 5000, "seats": 6},
+    "RUD-DLH": {"price": 4500, "seats": 12}
+}
+
+
+def display_flights():
+    print("Available flights:")
+    for route, details in flights.items():
+        print(f"{route} - {details['price']} ({details['seats']} seats  available)")
+
+
+def book_ticket(route):
+    if flights[route]["seats"] > 0:
+        flights[route]["seats"] -= 1
+        print(f"Booking confirmed for {route}.")
+        print(f"Price: {flights[route]['price']}")
+    else:
+        print(f"Sorry, no seats available on {route}.")
+
+
+def cancel_ticket(route):
+    flights[route]["seats"] += 1
+    print(f"Booking canceled for {route}. Seats available: {flights[route]['seats']}.")
+
+
+def main():
+    while True:
+        print("\nMenu:")
+        print("WELCOME TO VASA AIRLINE")
+        print("1. AVAILABLE FLIGHTS")
+        print("2. FLIGHT TICKETS BOOK")
+        print("3. CANCEL A TICKET")
+        print("4. EXIT")
+        choice = input("Choose an option (1-4): ").strip()
+        if choice == "1":
+            display_flights()
+        elif choice == "2":
+            route = input("Enter the flight route you want to book (e.g.,CHE - KPM): ").strip()
+            if route in flights:
+                book_ticket(route)
+            else:
+                print("Invalid route selected.")
+        elif choice == "3":
+            route = input("Enter the flight route you want to cancel (e.g., CHEKPM): ").strip()
+            if route in flights:
+                cancel_ticket(route)
+            else:
+                print("Invalid route selected.")
+        elif choice == "4":
+            print("Thank you for using the airline booking system.Goodbye!")
+            break
+        else:
+         print("Invalid choice. Please select a valid option.")
+if '__main__' == main():
+        main()
+
